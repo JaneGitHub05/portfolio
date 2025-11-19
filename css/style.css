@@ -1,5 +1,7 @@
 /* ACCESSIBILITY CONSIDERATIONS: https://css-tricks.com/having-a-little-fun-with-custom-focus-styles/ */
 
+/* VARIABLES */
+
 @import url('https://fonts.googleapis.com/css2?family=Google+Sans+Code:ital,wght@0,300..800;1,300..800&family=Pangolin&display=swap');
 
 :root {
@@ -88,6 +90,9 @@ h3 {
     letter-spacing: 0.1em;
 }
 
+/* From Uiverse.io by nihad-abbasov */
+/* switch settings 👇 */
+
 .ui-switch {
     /* switch */
     --switch-bg: rgb(163, 172, 181);
@@ -118,6 +123,8 @@ h3 {
 .slider .circle {
     top: calc(var(--circle-inset) * -1);
     left: 0;
+    /* TODO: take out bogus color property - just for passing WAVE check... */
+    color: black;
     width: var(--circle-diameter);
     height: var(--circle-diameter);
     position: absolute;
@@ -154,6 +161,8 @@ h3 {
     transition: all 500ms;
     opacity: 0;
 }
+
+/* actions */
 
 .ui-switch input:checked+.slider .circle {
     left: calc(100% - var(--circle-diameter));
