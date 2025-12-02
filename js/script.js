@@ -3,10 +3,10 @@ console.log("loaded");
 function typer(target, texts, period) {
     console.log(`Called typer(${target}, ${texts}, ${period})`);
 
-    let loopIndex = 0;
-    let revealed = "";
-    let isDeleting = false;
-    let pauseUntil = 0;
+    let loopIndex = 0;        // which phrase
+    let revealed = "";        // what's currently shown
+    let isDeleting = false;   // mode
+    let pauseUntil = 0;       // timestamp until which we pause
 
     const typingSpeed = 120;
     const deletingSpeed = 60;
@@ -22,16 +22,20 @@ function typer(target, texts, period) {
         const fullText = texts[loopIndex % texts.length];
 
         if (!isDeleting) {
+            // TYPE FORWARD
             revealed = fullText.substring(0, revealed.length + 1);
 
             if (revealed === fullText) {
+                // Finished typing → pause before deleting
                 isDeleting = true;
                 pauseUntil = now + pauseBeforeDelete;
             }
         } else {
+            // DELETE BACKWARD
             revealed = fullText.substring(0, revealed.length - 1);
 
             if (revealed === "") {
+                // Finished deleting → next word
                 isDeleting = false;
                 loopIndex++;
                 pauseUntil = now + pauseBetweenWords;
@@ -40,35 +44,61 @@ function typer(target, texts, period) {
 
         target.innerHTML = `${revealed}`;
 
-    }, 50);
+    }, 50);  // small loop tick for smooth animation
 }
 
+//TODO: ON #TERMINAL ENTER: pause, change image to look up, clear above interval, clear text, start new interval
+
 document.addEventListener("DOMContentLoaded", (e) => {
-    console.log("DOM conent loaded");
+    console.log("DOM content loaded");
     typer(document.querySelector("#typing"), ["Hello world", "It is i :D", "Hi hello testing testing."], 2000);
 });
 
-gsap.registerPlugin(ScrollTrigger, MorphSVGPlugin);
+// GALLERY
+import React from 'react';
+import { createRoot } from "react-dom/client";
+import Gallery from "../react/gallery.jsx";
 
-const down = 'M0-0.3C0-0.3,464,156,1139,156S2278-0.3,2278-0.3V683H0V-0.3z';
-const center = 'M0-0.3C0-0.3,464,0,1139,0s1139-0.3,1139-0.3V683H0V-0.3z';
+let root = null;
 
-ScrollTrigger.create({
-    trigger: '.footer',
-    start: 'top bottom',
-    toggleActions: 'play pause resume reverse',
-    markers: true,
-    onEnter: self => {
-        const velocity = self.getVelocity();
-        const variation = velocity / 10000;
+document.querySelector("#open-gallery").addEventListener("click", () => {
+    const mountPoint = document.querySelector("#gallery");
+    console.log("mountPoint" + mountPoint);
+    if (!root) {
+        root = createRoot(mountPoint);
+    }
+    document.querySelector("#mini-me").style.transition = "opacity 0.3s ease";
+    document.querySelector("#mini-me").style.opacity = "0";
+    root.render(React.createElement(Gallery));
+    requestAnimationFrame(() => {
+        gsap.from("#gallery", {
+            x: 80,
+            opacity: 0,
+            duration: 0.7,
+            ease: "power3.out"
+        });
+    });
+});
 
-        gsap.fromTo('#bouncy-path', {
-            morphSVG: down
-        }, {
-            duration: 2,
-            morphSVG: center,
-            ease: `elastic.out(${1 + variation}, ${1 - variation})`,
-            overwrite: 'true'
+document.querySelector("#open-aboutme").addEventListener("click", () => {
+    if (root) {
+        gsap.to("#mini-me", { opacity: 1, duration: 0.3, ease: "power1.out" });
+
+        gsap.to("#gallery", {
+            x: 80,
+            opacity: 0,
+            duration: 0.5,
+            ease: "power3.in",
+            onComplete: () => {
+                root.unmount();
+                root = null;
+
+                const mountPoint = document.querySelector("#gallery");
+                if (mountPoint) {
+                    mountPoint.style.opacity = "";
+                    mountPoint.style.transform = "";
+                }
+            }
         });
     }
 });
