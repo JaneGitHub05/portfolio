@@ -28,58 +28,71 @@
                 <img src="images/squirrel.svg" class="d-inline-block" alt="Logo" width="">
             </a>
             <!-- hamburger menu -->
-            <!-- TODO: take out bogus period - just for passing WAVE check... -->
+            <!-- TODO: add bogus period - just for passing WAVE check... -->
             <button class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarContents"
                 aria-controls="navbarContents" aria-expanded="false" aria-lable="Expand/collapse navbar hamburger menu">
-                <span class="navbar-toggler-icon">.</span>
+                <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarContents">
                 <ul class="navbar-nav ms-auto d-flex gap-2">
                     <li class="nav-item">
-                        <a class="nav-link active" href="#"><span>ABOUT ME</span></a>
+                        <a class="nav-link active" id="open-aboutme" href="#"><span>ABOUT ME</span></a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link active" href="#">GALLERY</a>
+                        <a class="nav-link active" id="open-gallery" href="#">GALLERY</a>
                     </li>
                 </ul>
             </div>
-            <!-- TODO: adapt toggle -->
-            <label class="ui-switch">
-                <input type="checkbox">
-                <div class="slider">
-                    <!-- TODO: take out bogus period - just for passing WAVE check... -->
-                    <div class="circle">.</div>
-                </div>
-            </label>
+
         </div>
     </nav>
     <main>
-        <section class="d-flex flex-column" style="height: 100vh" id="preamble">
+        <section class="d-flex flex-column" style="height: 80vh" id="preamble-section">
             <div class="container-fluid">
                 <h3>Hey! It's Jane Wei!</h3>
                 <span class="badge" id="terminal">$&nbsp;<span id="typing"></span></span>
             </div>
-            <div class="container-fluid d-flex h-100 justify-content-center align-items-center">
-                <img src="images/me.gif" alt="Mini-me" width="100">
+            <div class="container-fluid h-100 d-flex justify-content-center align-items-center">
+                <img id="mini-me" src="images/me.gif" alt="Mini-me" width="100">
+                <div id="gallery"></div>
             </div>
+
         </section>
 
-        <section class="d-flex" id="intro">
-            <div>
-                Welcome to my site! Here you'll find all things me, myself, and I (and squirrels).
-                <br>
-                <!-- go blue! cascade in and out on hover -->
-                I'm a senior at the University of Michigan, interested in all (and I mean ALL) things dev and
-                design! You'll find me spamming the skills I collect from all over to implement solutions for
-                problems of
-                security,
-                efficiency, and accessibility. Why? Because where there's a will there's a Wei ;D
+        <section class="d-flex" id="intro-section">
+            <div class="d-flex flex-column justify-content-center">
+                <div class="m-4" id="welcome">Welcome to my site!</div>
+                <div class="m-4" id="info">
+                    <strong>Here you'll find all things me, myself, and I (and squirrels).</strong>
+                    <br>
+                    <!--TODO: go blue! cascade in and out on hover-->
+                    Currently a senior at the University of Michigan, interested in all things dev and
+                    design! You'll find me spamming the skills I collect to implement solutions for
+                    problems of
+                    security,
+                    efficiency, and accessibility. Why? Because where there's a will there's a Wei ;D
+                    <br>
+                    <i class="devicon-linkedin-plain mt-3 mx-2"></i><i class="mt-3 mx-2 bi bi-envelope"></i>
+                </div>
             </div>
-            <img src="images/headshot.png" alt="portrait" class="ms-auto me-4" style="clip-path: circle();" width="400">
+            <img src="images/headshot.png" alt="portrait" class="ms-auto me-4 h-auto" style="clip-path: circle();"
+                width="400">
         </section>
 
-        <section class="d-flex" id="skills">
+
+        <section class="d-flex align-items-center" style="height: 100vh" id="skills-section">
+            <div class="d-flex" id="three-d"></div>
+            <div class="w-100" id="skills"></div>
         </section>
+
+        <!-- squiggle line -->
+        <svg width="1259" height="2647" viewBox="0 0 1259 2647" fill="none" xmlns="http://www.w3.org/2000/svg"
+            id="squiggle">
+            <path
+                d="M164.587 16.0009C164.587 16.0009 152.587 163.001 227.587 210.001C302.587 257.001 401.446 146.714 494.587 194.001C602.36 248.716 533.587 471.501 636.587 469.001C739.587 466.501 658.298 632.58 586.587 670.001C498.106 716.173 428.127 598.475 390.587 506.001C312.316 313.189 724.161 329.236 915.087 412.001C1072.54 480.255 1229.34 583.551 1194.09 751.501C1157.17 927.4 928.85 846.985 771.587 934.001C549.24 1057.03 189.671 1077.92 251.087 1324.5C274.374 1418 443.587 1324.5 390.587 1528C337.587 1731.5 646.266 1729.92 592.587 1878.5C525.74 2063.54 260.026 1958.9 89.0871 1861.5C-226.936 1681.43 564.055 1256.06 898.087 1400C1158.19 1512.08 1216.93 1756.81 1241.09 2039C1261.47 2277.06 1086.59 2631 1086.59 2631"
+                stroke="black" stroke-width="30" stroke-linejoin="round" stroke-linecap="round" />
+        </svg>
+
 
     </main>
 
@@ -94,12 +107,15 @@
     <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/ScrollTrigger.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/ScrollSmoother.min.js"></script>
     <!-- TODO: get MorphSVG CDN link -->
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/DrawSVGPlugin.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/MorphSVGPlugin.min.js"></script>
     <!-- custom (internal) -->
-    <script src="js/script.js"></script>
+    <script type="module" src="js/script.js"></script>
+    <script type="module" src="js/three.js"></script>
     <script type="module" src="./react/entry.jsx"></script>
+    <script type="module" src="./react/gallery.jsx"></script>
 
     <script>
-        // splitText();
         let split = SplitText.create("h3");
         gsap.from(split.chars, {
             duration: 1,            // whole animation takes 1s
@@ -110,7 +126,7 @@
 
         setTimeout(() => {
             gsap.to(split.chars, {
-                duration: 0.8,
+                duration: .5,
                 repeat: -1,                 // repeat infinitely
                 x: 'random(1, -1)',
                 y: 'random(1, -1)',
@@ -121,6 +137,106 @@
                 stagger: 0
             });
         }, 2000)
+
+        gsap.set(".split", { opacity: 1 });
+
+        let welcome;
+        let welcome_parent = document.querySelector("#welcome").parentNode;
+
+        SplitText.create("#welcome", {
+            type: "words,lines",
+            linesClass: "line",
+            autoSplit: true,
+            mask: "lines",
+            onSplit: (self) => {
+                welcome = gsap.from(self.words, {
+                    duration: 0.6,
+                    yPercent: 100,
+                    opacity: 0,
+                    stagger: 0.1,
+                    ease: "expo.out",
+                    scrollTrigger: {
+                        trigger: "#welcome",       // element to watch
+                        start: "top 50%",          // when top of element hits 50% of viewport
+                        toggleActions: "play none none none" // play once
+                    },
+                    onComplete: () => {
+                        // Shift only the first line slightly to the right
+                        gsap.to(self.lines[0], {
+                            letterSpacing: "0.2em",
+                            duration: 0.5,
+                            ease: "power2.out"
+                        });
+                    }
+                });
+                return welcome;
+            }
+        });
+
+        welcome.timeScale(0.2).play(0);
+
+        SplitText.create("#info", {
+            type: "words,lines",
+            linesClass: "line",
+            autoSplit: true,
+            mask: "lines",
+            onSplit: (self) => {
+                return gsap.from(self.lines, {
+                    duration: 0.6,
+                    yPercent: 100,
+                    opacity: 0,
+                    stagger: 0.2,
+                    ease: "expo.out",
+                    scrollTrigger: {
+                        trigger: "#info",       // element to watch
+                        start: "top 50%",          // when top of element hits 50% of viewport
+                        toggleActions: "play none none none" // play once
+                    }
+                });
+            }
+        });
+
+        const path = "#squiggle path";
+
+        const tl = gsap.timeline({
+            scrollTrigger: {
+                trigger: "body",
+                start: "top top",
+                end: "bottom bottom",
+                scrub: 1
+            }
+        });
+
+        // Draw the path from 0% to 100%
+        tl.fromTo(path,
+            { drawSVG: "0% 0%" },
+            { drawSVG: "0% 100%", ease: "none" }
+        );
+
+        // Reduce opacity between ~40%-60% scroll progress
+        tl.to(path, {
+            opacity: 0.2,
+            ease: "none",
+            scrollTrigger: {
+                trigger: "body",
+                start: "20% top",
+                end: "100% top",
+                scrub: true
+            }
+        });
+
+        gsap.from("#welcome", {
+            scaleX: 0,
+            transformOrigin: "left center", // expand from left
+            duration: 0.8,
+            ease: "power2.out",
+            scrollTrigger: {
+                trigger: "#welcome",
+                start: "top 80%",
+                toggleActions: "play none none none"
+            }
+        });
+
 
     </script>
 
