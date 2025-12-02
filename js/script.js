@@ -59,6 +59,7 @@ import React from 'react';
 import { createRoot } from "react-dom/client";
 import Gallery from "../react/gallery.jsx";
 
+
 let root = null;
 
 document.querySelector("#open-gallery").addEventListener("click", () => {
